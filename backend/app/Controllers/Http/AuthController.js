@@ -14,7 +14,7 @@ class AuthController {
 
     async show({ auth }){
         const user = await Database
-        .column('userName','email')
+        .column('name','userName','email')
         .table('users')
         .where('id', auth.user.id)
         .first()
