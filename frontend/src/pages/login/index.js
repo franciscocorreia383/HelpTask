@@ -29,6 +29,10 @@ function Login() {
     }
   }
 
+  function handleRegister() {
+    navigate('/register')
+  }
+
   return (
     <div id="container">
       <div id="loginArea">
@@ -67,7 +71,7 @@ function Login() {
           </div>
         </form>
         <div id="options">
-            <form>
+            <form onSubmit={handleRegister}>
                 <button className="optionsButtons">Cadastre-se</button>
             </form>
             <form >
