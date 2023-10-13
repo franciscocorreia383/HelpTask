@@ -1,7 +1,9 @@
 import { useState } from "react";
 import api from "../../environment/api";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -10,12 +12,16 @@ function Register() {
   const [phone, setPhone] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
 
+  function returnLogin(){
+    navigate('/')
+  }
+
   async function handleCreateUser(event) {
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       throw new Error("As senhas não conferem!");
     }
 
-    const body = {
+    const data = {
         name:name,
         userName:userName,
         email:email,
@@ -25,7 +31,8 @@ function Register() {
     };
 
     try {
-        
+        api.post('/register', data)
+        returnLogin()
     } catch (error) {
         alert("Erro")
     }
@@ -34,7 +41,7 @@ function Register() {
 
   return (
     <div id="container">
-      <span>Logo</span>
+      <span onClick={returnLogin}>Logo</span>
       <form onSubmit={handleCreateUser}>
         <div>
           <label>
@@ -45,6 +52,7 @@ function Register() {
             id="name"
             name="name"
             placeholder="Digite seu nome completo"
+            required
             onChange={(event) => setName(event.target.value)}
             value={name}
           />
@@ -58,6 +66,7 @@ function Register() {
             id="username"
             name="username"
             placeholder="Digite seu nome de usuário"
+            required
             onChange={(event) => setUserName(event.target.value)}
             value={userName}
           />
@@ -71,6 +80,7 @@ function Register() {
             id="email"
             name="email"
             placeholder="Digite seu e-mail"
+            required
             onChange={(event) => setEmail(event.target.value)}
             value={email}
           />
@@ -84,6 +94,7 @@ function Register() {
             id="password"
             name="password"
             placeholder="Digite sua senha"
+            required
             onChange={(event) => setPassword(event.target.value)}
             value={password}
           />
@@ -97,6 +108,7 @@ function Register() {
             id="confirm_password"
             name="confirm_password"
             placeholder="Confirme sua senha"
+            required
             onChange={(event) => setConfirmPassword(event.target.value)}
             value={confirmPassword}
           />
@@ -106,7 +118,7 @@ function Register() {
             <span>Telefone</span>
           </label>
           <input
-            type="number"
+            type="text"
             id="phone"
             name="phone"
             placeholder="Digite seu telefone"
@@ -119,7 +131,7 @@ function Register() {
             <span>Whatsapp</span>
           </label>
           <input
-            type="number"
+            type="text"
             id="whatsapp"
             name="whatsapp"
             placeholder="Digite seu whatsapp"

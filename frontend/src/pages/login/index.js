@@ -25,7 +25,7 @@ function Login() {
       navigate('/')
 
     } catch (error) {
-      alert(error);
+      alert("Email ou Senha invalidos!");
     }
   }
 
@@ -49,6 +49,7 @@ function Login() {
               id="email"
               name="email"
               placeholder="Digite seu e-mail"
+              required
               onChange={(event) => setEmail(event.target.value)}
               value={email}
             />
@@ -61,6 +62,7 @@ function Login() {
               type="password"
               id="password"
               name="password"
+              required
               placeholder="Digite sua senha"
               onChange={(event) => setPassword(event.target.value)}
               value={password}
