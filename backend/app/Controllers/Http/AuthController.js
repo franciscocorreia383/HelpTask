@@ -39,10 +39,32 @@ class AuthController {
     return user;
   }
 
-  async update(auth, request) {
-    const user = await User.find(auth.user.id)
+  async update({ auth, request, response, params }) {
+    const userData = request.only(["name", "email", "phone", "whatsapp"]);
+    const password = request.only(["password"]);
+    const user = await auth.getUser();
 
-    
+    if (!user) {
+      return response.status(404).send("User not found");
+    }
+
+    user.name = userData.name;
+    user.email = userData.email;
+    user.phone = userData.phone;
+    user.whatsapp = userData.whatsapp;
+/**
+    if (password) {
+      user.password = password;
+    }
+ */
+    try {
+      await user.save();
+    } catch (error) {
+      console.log(error);
+      return response.status(500).send("Erro ao salvar: " + error);
+    }
+
+    return response.status(200).send("Dados alterados");
   }
 }
 

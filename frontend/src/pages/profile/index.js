@@ -31,7 +31,6 @@ function Profile() {
   async function handleUpdateUser(e) {
     e.preventDefault()
     const data = {
-      id: id,
       name: name,
       email: email,
       password: password,
@@ -41,6 +40,7 @@ function Profile() {
 
     try {
       api.put("/profile", data);
+      alert("Salvo")
     } catch (error) {
       alert(error);
     }
