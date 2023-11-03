@@ -1,12 +1,9 @@
 'use strict'
 
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
 
-/**
- * Resourceful controller for interacting with tasks
- */
+const Task = use("App/Models/Task");
+const Database = use("Database");
+const User = use('App/Models/User');
 class TaskController {
   /**
    * Show a list of all tasks.
@@ -30,6 +27,17 @@ class TaskController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
+
+    const taskData = request.only(["user", "Title", "description", "deadline","predict","files"]);
+
+    try {
+      await Task.create(taskData);
+      return response.status(201).send('task criada')  
+    } catch (error) {
+      return response.status(500).send(error)
+    }
+    
+
   }
 
   /**

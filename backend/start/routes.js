@@ -12,4 +12,7 @@ Route.post('/sessions', 'SessionController.store')
 Route.group(() => {
   Route.get('users', 'AuthController.show')
   Route.put('profile', 'AuthController.update')
+
+  //cadastrar tasks
+  Route.post('tasks', 'TaskController.create')
 }).middleware(['auth'])
