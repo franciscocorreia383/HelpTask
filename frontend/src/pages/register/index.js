@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./styles.scss";
 import api from "../../environment/api";
 import { useNavigate } from "react-router-dom";
 
@@ -41,7 +42,7 @@ function Register() {
 
   return (
     <div id="container">
-      <span onClick={returnLogin}>Logo</span>
+      <span onClick={returnLogin}>Help Task</span>
       <form onSubmit={handleCreateUser}>
         <div>
           <label>

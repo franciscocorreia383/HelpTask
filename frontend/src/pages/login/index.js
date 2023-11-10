@@ -37,12 +37,12 @@ function Login() {
     <div id="container">
       <div id="loginArea">
         <div id="logo">
-          <span id="logo">Logo</span>
+          <span id="logo">Help Task</span>
         </div>
         <form id="loginForm" onSubmit={handleLogin}>
           <div className="inputLoginGroup">
             <label htmlFor="email">
-              <span>Email</span>
+              <span>Email </span>
             </label>
             <input
               type="email"
@@ -56,7 +56,7 @@ function Login() {
           </div>
           <div className="inputLoginGroup">
             <label htmlFor="password">
-              <span>Senha</span>
+              <span>Senha </span>
             </label>
             <input
               type="password"
@@ -69,15 +69,15 @@ function Login() {
             />
           </div>
           <div>
-            <button type="submit">Entrar</button>
+            <button type="submit" class="button-orange">Entrar</button>
           </div>
         </form>
         <div id="options">
             <form onSubmit={handleRegister}>
-                <button className="optionsButtons">Cadastre-se</button>
+                <button className="optionsButtons button-orange">Cadastre-se</button>
             </form>
             <form >
-                <button className="optionsButtons">Esqueci minha senha</button>
+                <button className="optionsButtons forget-password">Esqueci minha senha</button>
             </form>
         </div>
       </div>
