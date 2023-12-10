@@ -1,77 +1,78 @@
-#container {
-    background-color: #f1f1f1;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+/* Register Component Styles */
+#register-container {
+    background-color: #f4f5f7;
     width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
 
-#container span {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    cursor: pointer;
-    color: orange;
-}
+    .register-header {
+        .register-logo {
+            /* Styles for the logo in the register header */
+            font-size: 24px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+    }
 
-form {
-    width: 320px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(0, 162, 255, 0.1);
-}
+    #register-form {
+        width: 340px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
 
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
+        .register-input-group {
+            margin-bottom: 12px;
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: border 0.3s;
-}
+            label {
+                display: block;
+                margin-bottom: 5px;
+            }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border: 1px solid #00a2ff; 
-}
+            input[type='text'],
+            input[type='email'],
+            input[type='password'] {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #d2d6dc;
+                border-radius: 4px;
+                font-size: 16px;
+                transition: border 0.3s;
+            }
 
-button {
-    width: 100%;
-    padding: 10px 15px;
-    background-color: orange;
-    border: none;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
+            input[type='text']:focus,
+            input[type='email']:focus,
+            input[type='password']:focus {
+                border-color: #a0aec0;
+            }
+        }
 
-button:hover {
-    background-color: darkorange;
-}
+        .register-button-container {
+            .register-button {
+                /* Styles for the register button */
+                display: block;
+                width: 100%;
+                padding: 10px;
+                background-color: #ff9500;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                font-size: 16px;
+                transition: background-color 0.3s;
+                cursor: pointer;
 
-#container form div label span {
-    color: black;
-    font-weight: normal;
-    font-size: 14px;   
-    display: block;    
-    margin-bottom: 5px;  
+                &:hover {
+                    background-color: #ff7f00;
+                }
+            }
+        }
+    }
 }
-
-#container form div {
-    margin-bottom: 10px;
-}
-

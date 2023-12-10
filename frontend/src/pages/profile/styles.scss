@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+/* Profile Component Styles */
+#profile-container {
+    background-color: #f4f5f7;
+    width: 100%;
+    height: auto;
+    min-height: 100vh; // Ensures full height for smaller content
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px; // Gives some space from the window edges
+
+    .profile-header {
+        .profile-logo {
+            /* Replace with actual logo styles */
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 40px; // Space between logo and form
+        }
+    }
+
+    .profile-form-container {
+        width: 100%;
+        max-width: 400px; // Sets a max-width for larger screens
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-input-group {
+            margin-bottom: 20px;
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: 400; // Regular font-weight for the labels
+                color: #333; // Dark color for text
+            }
+
+            input {
+                width: 100%;
+                padding: 10px 15px;
+                border: 1px solid #d2d6dc;
+                border-radius: 4px;
+                font-size: 16px;
+                transition: border-color 0.3s;
+
+                &:focus {
+                    border-color: #a0aec0;
+                    outline: none; // Removes the default focus outline
+                }
+            }
+        }
+
+        .profile-button-container {
+            display: flex;
+            justify-content: flex-end; // Aligns the button to the right
+
+            .profile-button {
+                padding: 10px 20px;
+                background-color: #ff9500;
+                color: #ffffff;
+                border: none;
+                border-radius: 4px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: #e68500;
+                }
+            }
+        }
+    }
+}

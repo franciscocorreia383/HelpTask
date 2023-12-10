@@ -33,20 +33,21 @@ function Login() {
     navigate('/register')
   }
 
+ // Login Component
   return (
-    <div id="container">
-      <div id="loginArea">
-        <div id="logo">
-          <span id="logo">Help Task</span>
+    <div id="login-container">
+      <div id="login-area">
+        <div className="login-logo">
+          <span className="login-logo-text">Help Task</span>
         </div>
-        <form id="loginForm" onSubmit={handleLogin}>
-          <div className="inputLoginGroup">
-            <label htmlFor="email">
+        <form id="login-form" onSubmit={handleLogin}>
+          <div className="login-input-group">
+            <label htmlFor="login-email">
               <span>Email </span>
             </label>
             <input
               type="email"
-              id="email"
+              id="login-email"
               name="email"
               placeholder="Digite seu e-mail"
               required
@@ -54,13 +55,13 @@ function Login() {
               value={email}
             />
           </div>
-          <div className="inputLoginGroup">
-            <label htmlFor="password">
+          <div className="login-input-group">
+            <label htmlFor="login-password">
               <span>Senha </span>
             </label>
             <input
               type="password"
-              id="password"
+              id="login-password"
               name="password"
               required
               placeholder="Digite sua senha"
@@ -68,11 +69,11 @@ function Login() {
               value={password}
             />
           </div>
-          <div>
-            <button type="submit" class="button-orange">Entrar</button>
+          <div className="login-button-container">
+            <button type="submit" className="button-orange">Entrar</button>
           </div>
         </form>
-        <div id="options">
+        <div id="login-options">
             <form onSubmit={handleRegister}>
                 <button className="optionsButtons button-orange">Cadastre-se</button>
             </form>
@@ -84,5 +85,6 @@ function Login() {
     </div>
   );
 }
+
 
 export default Login;

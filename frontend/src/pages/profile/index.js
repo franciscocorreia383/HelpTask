@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../environment/api";
+import "./styles.scss";
 
 function Profile() {
   const navigate = useNavigate();
@@ -46,85 +47,86 @@ function Profile() {
     }
   }
 
-  return (
-    <div>
-      <div>
-        <span>Logo</span>
+    return (
+      <div id="profile-container">
+        <div className="profile-header">
+          <span className="profile-logo">Logo</span> {/* Replace with actual logo */}
+        </div>
+        <div className="profile-form-container">
+          <form onSubmit={handleUpdateUser}>
+            <div className="profile-input-group">
+              <label htmlFor="profile-name">
+                <span>Nome</span>
+              </label>
+              <input
+                type="text"
+                id="profile-name"
+                name="name"
+                placeholder="Digite seu nome completo"
+                onChange={(event) => setName(event.target.value)}
+                value={name}
+              />
+            </div>
+            <div className="profile-input-group">
+              <label htmlFor="profile-email">
+                <span>Email</span>
+              </label>
+              <input
+                type="email"
+                id="profile-email"
+                name="email"
+                placeholder="Digite seu e-mail"
+                onChange={(event) => setEmail(event.target.value)}
+                value={email}
+              />
+            </div>
+            <div className="profile-input-group">
+              <label htmlFor="profile-password">
+                <span>Senha</span>
+              </label>
+              <input
+                type="password"
+                id="profile-password"
+                name="password"
+                placeholder="Digite sua senha"
+                onChange={(event) => setPassword(event.target.value)}
+                value={password}
+              />
+            </div>
+            <div className="profile-input-group">
+              <label htmlFor="profile-phone">
+                <span>Telefone</span>
+              </label>
+              <input
+                type="text"
+                id="profile-phone"
+                name="phone"
+                placeholder="Digite seu telefone"
+                onChange={(event) => setPhone(event.target.value)}
+                value={phone}
+              />
+            </div>
+            <div className="profile-input-group">
+              <label htmlFor="profile-whatsapp">
+                <span>Whatsapp</span>
+              </label>
+              <input
+                type="text"
+                id="profile-whatsapp"
+                name="whatsapp"
+                placeholder="Digite seu whatsapp"
+                onChange={(event) => setWhatsapp(event.target.value)}
+                value={whatsapp}
+              />
+            </div>
+            <div className="profile-button-container">
+              <button type="submit" className="profile-button">Alterar Informações</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div>
-        <form onSubmit={handleUpdateUser}>
-          <div>
-            <label>
-              <span>Nome</span>
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Digite seu nome completo"
-              onChange={(event) => setName(event.target.value)}
-              value={name}
-            />
-          </div>
-          <div>
-            <label>
-              <span>Email</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Digite seu e-mail"
-              onChange={(event) => setEmail(event.target.value)}
-              value={email}
-            />
-          </div>
-          <div>
-            <label>
-              <span>Senha</span>
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Digite sua senha"
-              onChange={(event) => setPassword(event.target.value)}
-              value={password}
-            />
-          </div>
-          <div>
-            <label>
-              <span>Telefone</span>
-            </label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              placeholder="Digite seu telefone"
-              onChange={(event) => setPhone(event.target.value)}
-              value={phone}
-            />
-          </div>
-          <div>
-            <label>
-              <span>Whatsapp</span>
-            </label>
-            <input
-              type="text"
-              id="whatsapp"
-              name="whatsapp"
-              placeholder="Digite seu whatsapp"
-              onChange={(event) => setWhatsapp(event.target.value)}
-              value={whatsapp}
-            />
-          </div>
-          <div>
-            <button type="submit">Alterar Informações</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-}
+    );
+  }
+  
 
 export default Profile;
