@@ -1,4 +1,11 @@
 /* styles.css */
+
+$cor-de-fundo: #da6a20;
+$cor-do-texto: #ffffff;
+
+
+
+
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f4f4;
@@ -110,7 +117,37 @@ ul li input[type="checkbox"] {
 
 /* Button styles */
 button {
-  margin-top: 10px;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+
+  // Estado normal
+  background-color: $cor-de-fundo;
+  color: $cor-do-texto;
+
+  // Efeito hover
+  &:hover {
+    background-color: darken($cor-de-fundo, 10%);
+  }
+
+  // Efeito de foco
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 1);
+  }
+
+  // Efeito de ativo (quando pressionado)
+  &:active {
+    background-color: darken($cor-de-fundo, 20%);
+ }
+ 
 }
 
 /* styles.css */
