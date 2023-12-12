@@ -1,40 +1,101 @@
 import React, { useState } from 'react';
 import './styles.scss';
 
-function Card({ teamName, children, onAdd, onDelete }) {
+function Modal({ onSave, onClose }) {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSave(title, description);
+    onClose();
+  };
+
   return (
-    <div className="card">
-      <div className="card-header">
-        {teamName}
-      </div>
-      <div className="card-body">
-        {children}
-      </div>
-      <div className="card-footer">
-        <button onClick={onAdd} className="add-card">+ Add a card</button>
-        <button onClick={onDelete} className="delete-card">Delete this card</button>
-      </div>
+    <div className="modal">
+      <form onSubmit={handleSubmit}>
+        <input 
+          type="text" 
+          placeholder="Title" 
+          value={title} 
+          onChange={(e) => setTitle(e.target.value)} 
+          required 
+        />
+        <textarea 
+          placeholder="Description" 
+          value={description} 
+          onChange={(e) => setDescription(e.target.value)} 
+          required 
+        />
+        <button type="submit">Save</button>
+        <button type="button" onClick={onClose}>Close</button>
+      </form>
     </div>
   );
 }
 
-function Role({ title, name }) {
+function Card({ teamName, description, onDelete, checklist, createdDate, deadline }) {
+  const [checkedItems, setCheckedItems] = useState(checklist.reduce((acc, item) => {
+    acc[item.id] = item.done;
+    return acc;
+  }, {}));
+
+  const handleCheck = (id) => {
+    setCheckedItems({ ...checkedItems, [id]: !checkedItems[id] });
+  };
+
+  const handlePomodoro = () => {
+    console.log("Pomodoro functionality to be implemented");
+  };
+
+  const handleEisenhower = () => {
+    console.log("Eisenhower functionality to be implemented");
+  };
+
   return (
-    <div className="role">
-      <span className="title">{title}</span>
-      <span className="name">{name}</span>
+    <div className="card">
+      <div className="card-header">
+        {teamName}
+        <div>Created: {createdDate.toLocaleDateString()}</div>
+        <div>Deadline: {deadline.toLocaleDateString()}</div>
+      </div>
+      <div className="card-body">
+        {description}
+        <ul>
+          {checklist.map(item => (
+            <li key={item.id}>
+              <input 
+                type="checkbox" 
+                checked={checkedItems[item.id]} 
+                onChange={() => handleCheck(item.id)} 
+              />
+              {item.text}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="card-footer">
+        <button onClick={onDelete} className="delete-card">-</button>
+        <button onClick={handlePomodoro} className="pomodoro">Pomodoro</button>
+        <button onClick={handleEisenhower} className="eisenhower">Eisenhower</button>
+      </div>
     </div>
   );
 }
 
 function Board() {
-  const [teams, setTeams] = useState([
-    { name: "Team 1", roles: [{ title: "Dev Mgr", name: "First Name, Last Name" }] },
-    // Add more initial teams if needed
-  ]);
+  const [teams, setTeams] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const addCard = () => {
-    setTeams([...teams, { name: `Team ${teams.length + 1}`, roles: [] }]);
+  const addCard = (title, description) => {
+    const newCard = {
+      name: title, 
+      description, 
+      checklist: [{ id: 1, text: "Sample Task", done: false }], 
+      createdDate: new Date(), 
+      deadline: new Date(new Date().setDate(new Date().getDate() + 7)) // Set a deadline 7 days from now
+    };
+    setTeams([...teams, newCard]);
   };
 
   const deleteCard = index => {
@@ -48,13 +109,20 @@ function Board() {
         <Card 
           key={index} 
           teamName={team.name} 
-          onAdd={addCard} 
-          onDelete={() => deleteCard(index)}>
-          {team.roles.map((role, roleIndex) => (
-            <Role key={roleIndex} title={role.title} name={role.name} />
-          ))}
-        </Card>
+          description={team.description} 
+          checklist={team.checklist} 
+          createdDate={team.createdDate} 
+          deadline={team.deadline} 
+          onDelete={() => deleteCard(index)} 
+        />
       ))}
+      <button onClick={() => setIsModalOpen(true)}>+ Add a card</button>
+      {isModalOpen && (
+        <>
+          <div className="overlay"></div>
+          <Modal onSave={addCard} onClose={() => setIsModalOpen(false)} />
+        </>
+      )}
     </div>
   );
 }
