@@ -1,7 +1,9 @@
 .Appointment {
     text-align: center;
     margin: 20px;
- 
+    h2 {
+        color: #333;
+      }
   
   form {
     max-width: 300px;
@@ -13,12 +15,21 @@
     display: block;
   }
   
-  select,
-  input {
+  select{
     width: 100%;
     padding: 2px;
     margin-bottom: 5px;
     box-sizing: border-box;
+  }
+
+  input[type="text"] {
+    padding: 8px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; 
+    word-wrap: break-word;
   }
   
   button {
@@ -40,6 +51,9 @@
   li {
     margin-bottom: 8px;
     text-align: left;
+    max-width: 800px;
+    box-sizing: border-box; 
+    word-wrap: break-word;
   }
   
   li strong {

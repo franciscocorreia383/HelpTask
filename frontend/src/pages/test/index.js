@@ -106,14 +106,14 @@ function Board() {
 
   async function addCard(title, description){
     const newCard = {
-      user: 5,
+      user: 1,
       Title: title, 
       description, 
       deadline: new Date(new Date().setDate(new Date().getDate() + 7)),
       predict: "00:30",
       files: ""
     };
-    setTeams([...teams, newCard]);
+    //setTeams([...teams, newCard]);
     try {
       const response = await api.post("/tasks", newCard);
     } catch (error) {
