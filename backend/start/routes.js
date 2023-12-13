@@ -15,4 +15,6 @@ Route.group(() => {
 
   //cadastrar tasks
   Route.post('tasks', 'TaskController.create')
+  Route.get('tasks/:id','TaskController.show')
+  Route.get('tasks', 'TaskController.index')
 }).middleware(['auth'])

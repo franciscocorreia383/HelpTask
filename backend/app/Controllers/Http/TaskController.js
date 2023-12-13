@@ -14,7 +14,14 @@ class TaskController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index ({ request, response, view, auth }) {
+    const data = await Database
+      .table("tasks")
+      .where("user", auth.user.id);
+
+      console.log(auth.user.id);
+
+    return response.status(200).send(data);
   }
 
   /**
@@ -62,6 +69,14 @@ class TaskController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const data = await Database
+      .table("tasks")
+      .where("id", params.id)
+      .first();
+
+      console.log(data);
+
+    return response.status(200).send(data);
   }
 
   /**
