@@ -28,12 +28,13 @@ class TaskController {
    */
   async create ({ request, response, view }) {
 
-    const taskData = request.only(["user", "Title", "description", "deadline","predict","files"]);
-
+    const taskData = request.only(["user", "Title", "description", "deadline","predict"]);
+    console.log(taskData);
     try {
       await Task.create(taskData);
       return response.status(201).send('task criada')  
     } catch (error) {
+      console.log(error);
       return response.status(500).send(error)
     }
     

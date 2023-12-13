@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.scss';
+import api from '../../environment/api';
 
 function Modal({ onSave, onClose }) {
   const [title, setTitle] = useState('');
@@ -86,16 +87,38 @@ function Card({ teamName, description, onDelete, checklist, createdDate, deadlin
 function Board() {
   const [teams, setTeams] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [id, setId] = useState();
 
-  const addCard = (title, description) => {
+  useEffect(() => {
+    handleGetUserProfile();
+    console.log("UseEffect", id);
+  }, []);
+
+  async function handleGetUserProfile() {
+    try {
+      const response = await api.get("/users");
+      setId(response.data.id);
+      console.log(id);
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  async function addCard(title, description){
     const newCard = {
-      name: title, 
+      user: 5,
+      Title: title, 
       description, 
-      checklist: [{ id: 1, text: "Sample Task", done: false }], 
-      createdDate: new Date(), 
-      deadline: new Date(new Date().setDate(new Date().getDate() + 7)) // Set a deadline 7 days from now
+      deadline: new Date(new Date().setDate(new Date().getDate() + 7)),
+      predict: "00:30",
+      files: ""
     };
     setTeams([...teams, newCard]);
+    try {
+      const response = await api.post("/tasks", newCard);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const deleteCard = index => {
