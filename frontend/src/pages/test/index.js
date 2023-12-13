@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './styles.scss';
 import api from '../../environment/api';
+import { useNavigate  } from "react-router-dom";
 
 function Modal({ onSave, onClose }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -88,11 +91,30 @@ function Board() {
   const [teams, setTeams] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [id, setId] = useState();
+  const [cards, setCards] = useState([]);
+  const navigate = useNavigate();
 
+  
   useEffect(() => {
+    getCards();
     handleGetUserProfile();
     console.log("UseEffect", id);
   }, []);
+
+  async function getCards() {
+    try {
+      const response = await api.get("/tasks");
+      setCards(response.data)
+      console.log(cards);
+    } catch(error) {
+      alert(error);
+    }
+  }
+
+  function cardDetails(index) {
+    console.log(index);
+    navigate(`/task/${index}`)
+    }
 
   async function handleGetUserProfile() {
     try {
@@ -106,16 +128,17 @@ function Board() {
 
   async function addCard(title, description){
     const newCard = {
-      user: 5,
+      user: 1,
       Title: title, 
       description, 
       deadline: new Date(new Date().setDate(new Date().getDate() + 7)),
       predict: "00:30",
       files: ""
     };
-    setTeams([...teams, newCard]);
+    
     try {
       const response = await api.post("/tasks", newCard);
+      getCards();
     } catch (error) {
       console.log(error);
     }
@@ -127,26 +150,31 @@ function Board() {
   };
 
   return (
-    <div className="board">
-      {teams.map((team, index) => (
-        <Card 
-          key={index} 
-          teamName={team.name} 
-          description={team.description} 
-          checklist={team.checklist} 
-          createdDate={team.createdDate} 
-          deadline={team.deadline} 
-          onDelete={() => deleteCard(index)} 
-        />
-      ))}
-      <button onClick={() => setIsModalOpen(true)}>+ Add a card</button>
+ <div>
+  {cards.map((card, index) => (
+  <div className="card" key={index}>
+  <div className="card-header">
+    {card.Title}
+  </div>
+  <div className="card-body">
+   {card.description}
+  </div>
+  <div className="card-footer">
+    <button onClick={() => cardDetails(card.id)}>Detalhes</button>
+  </div>
+</div>
+  ))}
+
+  
+<button onClick={() => setIsModalOpen(true)}>+ Add a card</button>
       {isModalOpen && (
         <>
           <div className="overlay"></div>
           <Modal onSave={addCard} onClose={() => setIsModalOpen(false)} />
         </>
       )}
-    </div>
+
+ </div>
   );
 }
 
