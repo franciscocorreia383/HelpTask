@@ -13,6 +13,7 @@ function Task() {
   const [description, setDescription] = useState();
   const [deadline, setDeadline] = useState();
   const [predict, setPredict] = useState();
+  const [status, setStatus] = useState();
   const [files, setFiles] = useState();
   const [finishedAt, setFinishedAt] = useState();
   const [createdAt, setCreatedAt] = useState();
@@ -31,7 +32,7 @@ function Task() {
       setFinishedAt(response.finishedAt);
       setCreatedAt(response.created_at);
       setUpdatedAt(response.updated_at);
-
+      setStatus(response.status);
     } catch (error) {
       console.log(error);
     }
@@ -67,23 +68,44 @@ function Task() {
     return (
         <div className="app">
         <header className="header">
-            <h1>{title}</h1>
-            <p>{description}</p>
-            <p>{predict}</p>
-            <p>{formatDate(deadline)}</p>
-            <p>{formatDate(createdAt)}</p>
-            <p>{finalizado(finishedAt)}</p>
+          <div>
+            <div>
+              <h1>{title}</h1>
+            </div>
+            <div className="cabecalho">
+             <div>
+                <label for="predict">Previsão de conclusão:</label>
+                <p id="predict">{predict}</p>
+             </div>
+              <div>
+                <label for="deadline">Prazo:</label>
+                <p id="deadline">{formatDate(deadline)}</p>
+              </div>
+              <div>
+                <label for="criado">Criado em:</label>
+                <p id="criado">{formatDate(createdAt)}</p>
+              </div>
+              <div>
+                <label for="status">Status:</label>
+                <p id="status">{status}</p>
+              </div>
+           
+            </div>
+          </div>
         </header>
   
         <div className="container">
           <main className="main-content">
+            <div>
+              <label for="description"><strong>Descição:</strong></label>
+              <p id="description">{description}</p>
+            </div>
             <Checklist/>
             <Appointments/>
           </main>
   
           <aside className="sidebar">
-            <h3>Pomodoro</h3>
-            <button>Começar</button>
+           
           </aside>
         </div>
       </div>

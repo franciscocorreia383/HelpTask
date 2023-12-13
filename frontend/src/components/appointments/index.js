@@ -25,6 +25,7 @@ function Appointments(){
   
     return (
       <div className="Appointment">
+        <hr/>
         <h1>Comentários da Atividade</h1>
         <form onSubmit={handleSubmit}>
           <label>
@@ -45,7 +46,7 @@ function Appointments(){
         <ul>
           {comentarios.map((comentario, index) => (
             <li key={index}>
-              <strong>Tipo:</strong> {comentario.tipo}, <strong>Resumo:</strong> {comentario.resumo}
+              <strong>Status:</strong> {comentario.tipo}, <strong>Resumo:</strong> {comentario.resumo}
             </li>
           ))}
         </ul>

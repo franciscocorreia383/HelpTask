@@ -35,7 +35,8 @@ class TaskController {
    */
   async create ({ request, response, view }) {
 
-    const taskData = request.only(["user", "Title", "description", "deadline","predict"]);
+    let taskData = request.only(["user", "Title", "description", "deadline","predict","status"]);
+    taskData.status = "Não Iniciado"
     console.log(taskData);
     try {
       await Task.create(taskData);
