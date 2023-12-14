@@ -4,6 +4,7 @@ import api from "../../environment/api";
 import "./styles.scss";
 import Checklist from "../../components/checklist";
 import Appointments from "../../components/appointments";
+import Pomodoro from "../../components/pomodoro";
 
 function Task() {
   const navigate = useNavigate();
@@ -105,7 +106,7 @@ function Task() {
           </main>
   
           <aside className="sidebar">
-           
+           <Pomodoro/>
           </aside>
         </div>
       </div>
