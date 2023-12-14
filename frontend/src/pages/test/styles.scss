@@ -8,6 +8,12 @@ $cor-do-texto: #ffffff;
   display: flex;
   justify-content: center;
   padding-top: 2%;
+  max-height: 69vh; /* Altura máxima do container */
+  overflow-y: auto; /* Adiciona barra de rolagem quando necessário */
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 0 auto; /* Centraliza o container na página */
+  border: 1px solid #ccc;
  
   
 }
@@ -179,6 +185,8 @@ button {
 .modalLocal{
   display: flex;
   justify-content: center;
+  
+ 
 }
 
 /* Modal styles */
@@ -214,9 +222,16 @@ button {
 
 
 .buttonLocal{
-  display: flex;
-  justify-content: center;
-  align-items: end;
+  position: fixed;
+      bottom: 20px; /* Distância do botão até o final da tela */
+      left: 50%; /* Centraliza horizontalmente */
+      transform: translateX(-50%); /* Ajusta para centralizar corretamente */
+      padding: 10px 20px;
+      
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
 }
 
 /* Button styles */
