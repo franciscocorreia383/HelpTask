@@ -4,6 +4,13 @@ $cor-de-fundo: #da6a20;
 $cor-do-texto: #ffffff;
 
 
+.estrutura{
+  display: flex;
+  justify-content: center;
+  padding-top: 2%;
+ 
+  
+}
 
 
 body {
@@ -11,12 +18,15 @@ body {
   background-color: #f4f4f4;
   margin: 0;
   padding: 20px;
+  
+  
 }
 
-.board {
+.Board {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+
 }
 
 .card {
@@ -24,8 +34,8 @@ body {
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  width: 300px;
-  margin-bottom: 20px;
+  width: 70vw;
+  margin-bottom: 40px;
   overflow: hidden;
   transition: box-shadow 0.3s ease-in-out;
 }
@@ -165,6 +175,12 @@ button {
   align-items: center;
 }
 
+
+.modalLocal{
+  display: flex;
+  justify-content: center;
+}
+
 /* Modal styles */
 .modal {
   background-color: #fff;
@@ -195,6 +211,14 @@ button {
   margin-bottom: 0; /* Only the textarea will have margin at the bottom */
 }
 
+
+
+.buttonLocal{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
 /* Button styles */
 .modal button {
   padding: 10px;
@@ -218,4 +242,43 @@ button {
 .modal input:focus::placeholder,
 .modal textarea:focus::placeholder {
   color: transparent;
+}
+
+
+
+
+
+
+
+
+// Defina a cor laranja
+$cor-laranja: #FFA500;
+
+// Estilo da Navbar
+.navbar {
+  background-color: $cor-laranja;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Estilo para os itens da Navbar
+.navbar-item {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+
+  &:hover {
+    color: darken($cor-laranja, 10%); // Escurecer a cor ao passar o mouse
+  }
+}
+
+// Estilo para o logo na Navbar
+.navbar-logo {
+  img {
+    max-height: 40px;
+  }
 }

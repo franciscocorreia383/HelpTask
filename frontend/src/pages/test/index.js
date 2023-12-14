@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './styles.scss';
 import api from '../../environment/api';
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Modal({ onSave, onClose }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  
-  
+  const [Deadline, setDeadline] = useState('');
+  const [horario, setHorario] = useState('');
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,25 +18,42 @@ function Modal({ onSave, onClose }) {
   };
 
   return (
-    <div className="modal">
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Title" 
-          value={title} 
-          onChange={(e) => setTitle(e.target.value)} 
-          required 
-        />
-        <textarea 
-          placeholder="Description" 
-          value={description} 
-          onChange={(e) => setDescription(e.target.value)} 
-          required 
-        />
-        <button type="submit">Save</button>
-        <button type="button" onClick={onClose}>Close</button>
-      </form>
-    </div>
+
+    <estrutura>
+      <div className="modal">
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <textarea
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+          <input
+            type="date"
+            placeholder="Deadline"
+            value={Deadline}
+            onChange={(e) => setDeadline(e.target.value)}
+            required
+          />
+          <input
+          type="time"
+          placeholder="Horário"
+          value={horario}
+          onChange={(e) => setHorario(e.target.value)}
+          required
+          />
+          <button type="submit">Save</button>
+          <button type="button" onClick={onClose}>Close</button>
+        </form>
+      </div>
+    </estrutura>
   );
 }
 
@@ -57,31 +76,34 @@ function Card({ teamName, description, onDelete, checklist, createdDate, deadlin
   };
 
   return (
-    <div className="card">
-      <div className="card-header">
-        {teamName}
-        <div>Created: {createdDate.toLocaleDateString()}</div>
-        <div>Deadline: {deadline.toLocaleDateString()}</div>
-      </div>
-      <div className="card-body">
-        {description}
-        <ul>
-          {checklist.map(item => (
-            <li key={item.id}>
-              <input 
-                type="checkbox" 
-                checked={checkedItems[item.id]} 
-                onChange={() => handleCheck(item.id)} 
-              />
-              {item.text}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="card-footer">
-        <button onClick={onDelete} className="delete-card">-</button>
-        <button onClick={handlePomodoro} className="pomodoro">Pomodoro</button>
-        <button onClick={handleEisenhower} className="eisenhower">Eisenhower</button>
+    <div className='estrutura'>
+
+      <div className="card">
+        <div className="card-header">
+          {teamName}
+          <div>Created: {createdDate.toLocaleDateString()}</div>
+          <div>Deadline: {deadline.toLocaleDateString()}</div>
+        </div>
+        <div className="card-body">
+          {description}
+          <ul>
+            {checklist.map(item => (
+              <li key={item.id}>
+                <input
+                  type="checkbox"
+                  checked={checkedItems[item.id]}
+                  onChange={() => handleCheck(item.id)}
+                />
+                {item.text}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="card-footer">
+          <button onClick={onDelete} className="delete-card">-</button>
+          <button onClick={handlePomodoro} className="pomodoro">Pomodoro</button>
+          <button onClick={handleEisenhower} className="eisenhower">Eisenhower</button>
+        </div>
       </div>
     </div>
   );
@@ -94,7 +116,7 @@ function Board() {
   const [cards, setCards] = useState([]);
   const navigate = useNavigate();
 
-  
+
   useEffect(() => {
     getCards();
     handleGetUserProfile();
@@ -106,7 +128,7 @@ function Board() {
       const response = await api.get("/tasks");
       setCards(response.data)
       console.log(cards);
-    } catch(error) {
+    } catch (error) {
       alert(error);
     }
   }
@@ -114,7 +136,7 @@ function Board() {
   function cardDetails(index) {
     console.log(index);
     navigate(`/task/${index}`)
-    }
+  }
 
   async function handleGetUserProfile() {
     try {
@@ -126,16 +148,16 @@ function Board() {
     }
   }
 
-  async function addCard(title, description){
+  async function addCard(title, description) {
     const newCard = {
       user: 1,
-      Title: title, 
-      description, 
+      Title: title,
+      description,
       deadline: new Date(new Date().setDate(new Date().getDate() + 7)),
       predict: "00:30",
       files: ""
     };
-    
+
     try {
       const response = await api.post("/tasks", newCard);
       getCards();
@@ -150,39 +172,53 @@ function Board() {
   };
 
   return (
- <div>
-  {cards.map((card, index) => (
-  <div className="card" key={index}>
-  <div className="card-header">
-    {card.Title}
-  </div>
-  <div className="card-body">
-   {card.description}
-  </div>
-  <div className="card-footer">
-    <button onClick={() => cardDetails(card.id)}>Detalhes</button>
-  </div>
-</div>
-  ))}
+    <div>
+      {cards.map((card, index) => (
+        <div className="card" key={index}>
+          <div className="card-header">
+            {card.Title}
+          </div>
+          <div className="card-body">
+            {card.description}
+          </div>
+          <div className="card-footer">
+            <button onClick={() => cardDetails(card.id)}>Detalhes</button>
+          </div>
+        </div>
+      ))}
 
-  
-<button onClick={() => setIsModalOpen(true)}>+ Add a card</button>
+
+     <div className='buttonLocal'> <button onClick={() => setIsModalOpen(true)}>+ Add a card</button></div> 
+
       {isModalOpen && (
         <>
           <div className="overlay"></div>
-          <Modal onSave={addCard} onClose={() => setIsModalOpen(false)} />
+       <div className='modalLocal'>  <Modal onSave={addCard} onClose={() => setIsModalOpen(false)} /> </div> 
         </>
       )}
 
- </div>
+    </div>
   );
 }
 
 function Test() {
   return (
+
+
     <div>
-      <h1>Team Layout</h1>
-      <Board />
+      <div class="navbar">
+        <div class="navbar-logo">
+
+        </div>
+        <nav>
+          <a href="/profile" class="navbar-item">Editar usuario</a>
+          <a href="/" class="navbar-item">Sair</a>
+          
+        </nav>
+      </div>
+      <div className='estrutura'>
+        <Board />
+      </div>
     </div>
   );
 }
